@@ -1,9 +1,12 @@
 package com.cognizant.guestBook.integration;
 
+import com.cognizant.guestBook.entity.GuestBookEntity;
+import com.cognizant.guestBook.repository.GuestBookRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
@@ -15,14 +18,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-//@ActiveProfiles("Qa")
+@ActiveProfiles("qa")
 public class GuestBookTest {
 
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private GuestBookRepo guestBookRepo;
+
     @Test
     public void getAllEntriesTest() throws Exception {
+
+        GuestBookEntity guestBookEntity = new GuestBookEntity();
+        guestBookEntity.setName("TestName");
+        guestBookEntity.setComment("TestComment");
+        guestBookRepo.save(guestBookEntity);
+
         RequestBuilder requestBuilder = get("/");
         mockMvc.perform(requestBuilder)
         .andExpect(status().isOk())
