@@ -1,12 +1,12 @@
 package com.cognizant.guestBook.controller;
 
 import com.cognizant.guestBook.entity.GuestBookEntity;
+import com.cognizant.guestBook.request.GuestBookRequest;
 import com.cognizant.guestBook.service.GuestBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,10 +19,14 @@ public class GuestBookController {
     private GuestBookService guestBookService;
 
     @GetMapping
-    public ResponseEntity<?> getAllEntries()
-    {
+    public ResponseEntity<?> getAllEntries() {
         List<GuestBookEntity> entries = guestBookService.getAllEntries();
         return ResponseEntity.ok(entries);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> addNewComment(@RequestBody GuestBookRequest guestBookRequest){
+        return new ResponseEntity<>(guestBookService.createComment(guestBookRequest), HttpStatus.CREATED);
     }
 
 }

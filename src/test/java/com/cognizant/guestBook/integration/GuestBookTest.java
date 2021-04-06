@@ -3,8 +3,8 @@ package com.cognizant.guestBook.integration;
 import com.cognizant.guestBook.entity.GuestBookEntity;
 import com.cognizant.guestBook.repository.GuestBookRepo;
 import com.cognizant.guestBook.request.GuestBookRequest;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -40,6 +40,11 @@ public class GuestBookTest {
     @Autowired
     private ObjectMapper mapper;
 
+    @BeforeEach
+    void cleanUp(){
+        guestBookRepo.deleteAll();
+    }
+
     @Test
     public void getAllEntriesTest() throws Exception {
 
@@ -53,7 +58,7 @@ public class GuestBookTest {
         .andExpect(status().isOk())
         .andExpect(jsonPath("$", hasSize(1)))
         .andDo(print())
-        .andDo(document("Guest Book", responseFields(
+        .andDo(document("Comments", responseFields(
                 fieldWithPath("[0].name").description("Name of Guest."),
                 fieldWithPath("[0].comment").description("Guest Comment.")
         )))
@@ -74,8 +79,9 @@ public class GuestBookTest {
         mockMvc.perform(rq)
                 .andExpect(status().isCreated())
                 .andDo(print())
-                .andDo(document("Post Comment."))
-        ;
+                .andDo(document("AddComment", responseFields(
+                        fieldWithPath("message").description("Response Message.")
+                        )));
     }
 
 }
