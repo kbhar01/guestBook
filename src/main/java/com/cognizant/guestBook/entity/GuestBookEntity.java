@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="guest_book")
