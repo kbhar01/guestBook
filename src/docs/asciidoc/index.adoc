@@ -1,0 +1,8 @@
+
+Guest Book
+
+.request
+include::{snippets}/http-request.adoc[]
+
+.response
+include::{snippets}/http-response.adoc[]
