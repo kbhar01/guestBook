@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="#">
-    <img src="./img/img.png" alt="guest book logo" width="85" height="85">
+    <img src="./img/img.png" alt="guest book logo" width="247" height="73">
   </a>
 </p>
 
