@@ -19,6 +19,7 @@
 
 - [Technology Used](#technology-used)
 - [Installation Instruction](#installation-instruction)
+- [Auto-Deploy Instructions](#auto-deploy-instructions)
 - [API](#api)
 - [What's Included](#whats-included)
 - [Creators](#developers)
@@ -73,6 +74,42 @@ Follow these easy step:
 
 4. Enjoy
 
+## Auto-Deploy Instructions
+Follow these to deploy the container automatically.
+Files Required:
+- Dockerfile
+- heroku.yml
+Steps:
+
+1. Login into heroku.
+```shell
+heroku login
+```
+
+2. Add Heroku Git Remote
+```shell
+# guest-book-service is my app name. Please use yours 
+heroku git:remote -a guest-book-service 
+```
+
+3. Use Heroku Stack to set heroku.yml
+```shell
+heroku stack:set container
+```
+
+4. Commit and Push into heroku remote.
+```shell
+git add --all 
+git commit -m "heroku commit"
+git push heroku master 
+```
+
+5. Open App
+```shell
+heroku open
+```
+
+Hint: For auto deploy please follow step 4.
 ## Sample Server
 Feel free to play with our sample server. 
 
