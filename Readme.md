@@ -173,6 +173,7 @@ Schemes: http
     </tr>
     </tbody>
 </table>
+
 #### API Details
 
 #### POST /
