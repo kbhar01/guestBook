@@ -58,7 +58,7 @@ Follow these easy step:
      $ docker build -t <your email>/guestbook .
      $ docker network create --driver bridge guestbooknetwork
      $ docker run -d -p 5432:5432 -e POSTGRES_USER=devuser -e  POSTGRES_PASSWORD=cog -e POSTGRES_DB=guestbookdb --network guestbooknetwork --name guestbookpostgres postgres
-     $ docker run -d -p 8081:8080 -e SPRING_PROFILES_ACTIVE=dockerlocal --name guestbookservice <your email>/guestbook
+     $ docker run -d -p 8081:8080 -e SPRING_PROFILES_ACTIVE=dockerlocal --network guestbooknetwork --name guestbookservice <your email>/guestbook
      ```
 3. Heroku Deployment (Heroku CLI Required.)
    
